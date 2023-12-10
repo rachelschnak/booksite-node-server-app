@@ -1,0 +1,35 @@
+import * as dao from "./dao.js";
+
+function LikesRoutes(app) {
+    const findAllLikes = async (req, res) => {};
+    const createUserLikesBook = async (req, res) => {
+        const userId = req.params.userId;
+        const bookId = req.params.bookId;
+        const likes = await dao.createUserLikesBook(userId, bookId);
+        res.json(likes);
+    };
+    const deleteUserLikesBook = async (req, res) => {
+        const userId = req.params.userId;
+        const bookId = req.params.bookId;
+        const status = await dao.deleteUserLikesBook(userId, bookId);
+        res.json(status);
+    };
+    const findUsersThatLikeBook = async (req, res) => {
+        const bookId = req.params.bookId;
+        const likes = await dao.findUsersThatLikeBook(bookId);
+        res.json(likes);
+    };
+    const findBooksThatUserLikes = async (req, res) => {
+        const userId = req.params.userId;
+        const likes = await dao.findBooksThatUserLikes(userId);
+        res.json(likes);
+    };
+
+    app.get("/api/likes", findAllLikes);
+    app.post("/api/users/:userId/likes/:bookId", createUserLikesBook);
+    app.delete("/api/users/:userId/likes/:bookId", deleteUserLikesBook);
+    app.get("/api/likes/:bookId/users", findUsersThatLikeBook);
+    app.get("/api/users/:userId/likes", findBooksThatUserLikes);
+}
+
+export default LikesRoutes;
