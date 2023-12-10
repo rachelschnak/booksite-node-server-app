@@ -1,4 +1,5 @@
 import * as dao from "./dao.js";
+import {findReviewsByUser} from "./dao.js";
 
 function ReviewRoutes(app) {
     const findAllReviews = async (req, res) => {};
@@ -18,7 +19,7 @@ function ReviewRoutes(app) {
 
     const findReviewsByUser = async (req, res) => {
         const userId = req.params.userId;
-        const reviews = await dao.findBooksThatUserLikes(userId);
+        const reviews = await dao.findReviewsByUser(userId);
         res.json(reviews);
     };
 

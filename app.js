@@ -11,10 +11,10 @@ import LikesRoutes from "./likes/routes.js";
 import FollowsRoutes from "./follows/routes.js";
 import ReviewRoutes from "./reviews/routes.js";
 
-mongoose.connect("mongodb://127.0.0.1:27017/project");
+//mongoose.connect("mongodb://127.0.0.1:27017/project");
 
-//const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017'
-//mongoose.connect(CONNECTION_STRING, {dbName: 'project'});
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017'
+mongoose.connect(CONNECTION_STRING, {dbName: 'project'});
 
 const app = express();
 
