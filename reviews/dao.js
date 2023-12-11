@@ -13,7 +13,7 @@ export const findBookReviews = (bookId) =>
     model.find({bookId: bookId});
 
 export const updateReview = (userId, bookId, review) =>
-    model.updateOne({ user: userId, bookId: bookId}, { $set: review });
+    model.updateOne({ user: userId, bookId: bookId}, { review });
 
 
 

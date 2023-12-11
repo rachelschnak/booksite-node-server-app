@@ -30,11 +30,15 @@ function ReviewRoutes(app) {
     };
 
     const updateReview = async (req, res) => {
-        const userId  = req.params.userId;
-        const bookId = req.params.bookId
-        const review = req.params.review;
-        const status = await dao.updateReview(userId, bookId, updatedReview);
-        res.json(status);
+        try {
+            const userId = req.params.userId;
+            const bookId = req.params.bookId
+            const review = req.params.review;
+            const status = await dao.updateReview(userId, bookId, review);
+            res.json(status);
+        } catch(error) {
+            res.json({message: "didn't update review"})
+        }
     };
 
     app.get("/api/reviews", findAllReviews);

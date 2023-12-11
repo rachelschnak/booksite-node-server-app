@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const followSchema = new mongoose.Schema(
     {
         follower: {
@@ -14,6 +15,7 @@ const followSchema = new mongoose.Schema(
         collection: "follows",
     }
 );
+followSchema.index({'follower' : 1, 'followed' : 1, }, {unique: true});
 
 
 export default followSchema;

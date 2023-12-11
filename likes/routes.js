@@ -3,10 +3,14 @@ import * as dao from "./dao.js";
 function LikesRoutes(app) {
     const findAllLikes = async (req, res) => {};
     const createUserLikesBook = async (req, res) => {
-        const userId = req.params.userId;
-        const bookId = req.params.bookId;
-        const likes = await dao.createUserLikesBook(userId, bookId);
-        res.json(likes);
+        try {
+            const userId = req.params.userId;
+            const bookId = req.params.bookId;
+            const likes = await dao.createUserLikesBook(userId, bookId);
+            res.json(likes);
+        } catch (error) {
+            res.json({message: "User already follows user"})
+        }
     };
     const deleteUserLikesBook = async (req, res) => {
         const userId = req.params.userId;
