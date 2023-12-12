@@ -11,7 +11,7 @@ export const findBookStatusesOfUser = (userId) => model.find({ user: userId });
 export const updateBookStatus = (userId, bookId, bookStatus) =>
     model.updateOne({ user: userId, bookId: bookId }, { bookStatus: bookStatus});
 
-export const getBookStatusOfUser = (userId, bookId) => model.find({ user: userId , bookId: bookId});
+export const getBookStatusOfUser = (userId, bookId) => model.findOne({ user: userId , bookId: bookId});
 
 
 

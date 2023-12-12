@@ -31,10 +31,14 @@ function bookStatusRoutes(app) {
     };
 
     const getBookStatusOfUser = async (req, res) => {
+        try {
             const userId = req.params.userId;
             const bookId = req.params.bookId;
             const status = await dao.getBookStatusOfUser(userId, bookId);
             res.json(status);
+        } catch (error) {
+            res.json({message: "Cannot get book status of user"})
+        }
 
     };
 
