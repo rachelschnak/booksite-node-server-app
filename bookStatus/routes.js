@@ -48,7 +48,11 @@ function bookStatusRoutes(app) {
         const updatedBookStatus = req.body.bookStatus
         const status = await dao.updateBookStatus(userId, bookId, updatedBookStatus);
         res.json(status);
+    };
 
+    const findAllStatuses = async (req, res) => {
+        const statuses = await dao.findAllStatuses();
+        res.json(statuses);
     };
 
 
@@ -58,6 +62,7 @@ function bookStatusRoutes(app) {
     app.get("/api/bookStatus/:bookId/users", findUsersWithBookStatus);
     app.get("/api/users/:userId/bookStatus/:bookId", getBookStatusOfUser);
     app.get("/api/users/:userId/bookStatus", findBookStatusesOfUser);
+    app.get("/api/bookStatus", findAllStatuses);
 
 }
 

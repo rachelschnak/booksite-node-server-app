@@ -18,15 +18,23 @@ function ReviewRoutes(app) {
     };
 
     const findReviewsByUser = async (req, res) => {
-        const userId = req.params.userId;
-        const reviews = await dao.findReviewsByUser(userId);
-        res.json(reviews);
+        try {
+            const userId = req.params.userId;
+            const reviews = await dao.findReviewsByUser(userId);
+            res.json(reviews);
+        }catch (error) {
+            res.json({message: "did find users review"})
+        }
     };
 
     const findBookReviews = async (req, res) => {
-        const bookId = req.params.bookId;
-        const reviews = await dao.findBookReviews(bookId);
-        res.json(reviews);
+        try {
+            const bookId = req.params.bookId;
+            const reviews = await dao.findBookReviews(bookId);
+            res.json(reviews);
+        } catch (error) {
+            res.json({message: "didn't books reviews"})
+        }
     };
 
     const updateReview = async (req, res) => {

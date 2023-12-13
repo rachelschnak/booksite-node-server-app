@@ -1,7 +1,12 @@
 import * as dao from "./dao.js";
 
 function LikesRoutes(app) {
-    const findAllLikes = async (req, res) => {};
+    const findAllLikes = async (req, res) => {
+        const likes = await dao.findAllLikes();
+        res.json(likes);
+    };
+
+
     const createUserLikesBook = async (req, res) => {
         try {
             const userId = req.params.userId;
@@ -19,9 +24,13 @@ function LikesRoutes(app) {
         res.json(status);
     };
     const findUsersThatLikeBook = async (req, res) => {
-        const bookId = req.params.bookId;
-        const likes = await dao.findUsersThatLikeBook(bookId);
-        res.json(likes);
+        try {
+            const bookId = req.params.bookId;
+            const likes = await dao.findUsersThatLikeBook(bookId);
+            res.json(likes);
+        } catch (error) {
+            res.json({message: "didnt get book likes"})
+        }
     };
     const findBooksThatUserLikes = async (req, res) => {
         const userId = req.params.userId;
