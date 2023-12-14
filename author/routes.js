@@ -6,17 +6,16 @@ function AuthorRoutes(app) {
         try {
             const userId = req.params.userId;
             const bookId = req.params.bookId;
-            const comment = req.body;
-            const comments = await dao.createAuthorComment(userId, bookId, comment);
-            res.json(comments);
+            const comment = req.params.comment;
+            const response = await dao.createAuthorComment(userId, bookId, comment);
+            res.json(response);
         } catch (error) {
-            res.json({message: "User already follows user"})
+            res.json({message: "Error author creating comment"})
         }
     };
     const deleteAuthorsComment = async (req, res) => {
-        const userId = req.params.userId;
         const bookId = req.params.bookId;
-        const status = await dao.deleteAuthorsComment(userId, bookId);
+        const status = await dao.deleteAuthorsComment(bookId);
         res.json(status);
     };
     const findAuthorComment = async (req, res) => {
@@ -30,17 +29,18 @@ function AuthorRoutes(app) {
     };
 
     const updateAuthorComment = async (req, res) => {
-        const userId  = req.params.id;
-        const bookId  = req.params.id;
-        const comment = req.body;
+        const userId  = req.params.userId;
+        const bookId  = req.params.bookId;
+        const comment = req.params.comment;
         const status = await dao.updateAuthorComment(userId, bookId, comment);
+        res.json(status);
     };
 
 
-    app.post("/api/author/:userId/comment/:bookId", createAuthorComment);
-    app.delete("/api/author/:userId/comment/:bookId", deleteAuthorsComment);
+    app.post("/api/author/:userId/comment/:bookId/:comment", createAuthorComment);
+    app.delete("/api/comment/:bookId", deleteAuthorsComment);
     app.get("/api/book/:bookId/comment", findAuthorComment);
-    app.put("/api/author/:userId/comment/:bookId", updateAuthorComment);
+    app.put("/api/author/:userId/comment/:bookId/:comment", updateAuthorComment);
 
 }
 

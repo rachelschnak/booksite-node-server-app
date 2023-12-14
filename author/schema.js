@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 const authorsSchema = new mongoose.Schema({
-                                        authorName: {type: String},
-                                              bookId: { type: String},
-                                              comment: {type: String},
+                                        userId: {type: String, require: true},
+                                              bookId: { type: String, require: true, unique: true},
+                                              comment: {type: String, require: true},
                                        },
                                        { collection: "authorStuff" });
-authorsSchema.index({'bookId' : 1, 'authorName' : 1}, {unique: true});
 
 export default authorsSchema;
