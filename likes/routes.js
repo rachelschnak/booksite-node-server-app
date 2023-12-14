@@ -6,6 +6,11 @@ function LikesRoutes(app) {
         res.json(likes);
     };
 
+    const findMostRecentLikes = async (req, res) => {
+        const likes = await dao.findMostRecentLikes();
+        res.json(likes);
+    };
+
 
     const createUserLikesBook = async (req, res) => {
         try {
@@ -39,6 +44,7 @@ function LikesRoutes(app) {
     };
 
     app.get("/api/likes", findAllLikes);
+    app.get("/api/likes/mostRecent", findMostRecentLikes);
     app.post("/api/users/:userId/likes/:bookId", createUserLikesBook);
     app.delete("/api/users/:userId/likes/:bookId", deleteUserLikesBook);
     app.get("/api/likes/:bookId/users", findUsersThatLikeBook);
