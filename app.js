@@ -1,8 +1,5 @@
 import express from 'express';
 import "dotenv/config";
-import CourseRoutes from "./courses/routes.js";
-import ModuleRoutes from "./modules/routes.js";
-import AssignmentsRoutes from "./assignments/routes.js";
 import cors from "cors";
 import UserRoutes from "./users/routes.js";
 import mongoose from "mongoose";
@@ -11,6 +8,7 @@ import LikesRoutes from "./likes/routes.js";
 import FollowsRoutes from "./follows/routes.js";
 import ReviewRoutes from "./reviews/routes.js";
 import bookStatusRoutes from "./bookStatus/routes.js";
+import AuthorRoutes from "./author/routes.js";
 
 //mongoose.connect("mongodb://127.0.0.1:27017/project");
 
@@ -39,13 +37,12 @@ if (process.env.NODE_ENV !== "development") {
 app.use(session(sessionOptions));
 app.use(express.json());
 app.listen(process.env.PORT || 4000);
-ModuleRoutes(app);
-CourseRoutes(app);
-AssignmentsRoutes(app);
+
 UserRoutes(app);
 LikesRoutes(app);
 FollowsRoutes(app);
 ReviewRoutes(app);
 bookStatusRoutes(app);
+AuthorRoutes(app);
 
 
